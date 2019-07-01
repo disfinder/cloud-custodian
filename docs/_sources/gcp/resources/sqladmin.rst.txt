@@ -5,8 +5,6 @@ gcp.sqladmin resources
 
   - :ref:`gcp.sql-backup-run <gcp.sql-backup-run>`
 
-  - :ref:`gcp.sql-database <gcp.sql-database>`
-
   - :ref:`gcp.sql-instance <gcp.sql-instance>`
 
   - :ref:`gcp.sql-ssl-cert <gcp.sql-ssl-cert>`
@@ -20,37 +18,6 @@ gcp.sqladmin resources
 
 gcp.sql-backup-run
 ==================
-
-
-
-Filters
--------
-
-
-  - :ref:`event <gcp.common.filters.event>`
-  
-  - :ref:`value <gcp.common.filters.value>`
-  
-
-
-
-
-Actions
--------
-
-
-  - :ref:`notify <gcp.common.actions.notify>`
-  
-  - :ref:`webhook <gcp.common.actions.webhook>`
-  
-
-
-
-
-.. _gcp.sql-database:
-
-gcp.sql-database
-================
 
 
 

@@ -279,36 +279,44 @@ The <cite>parent_spec</cite> has following fields: <cite>resource</cite>, <cite>
 </ul>
 <p>An example that uses <cite>parent_spec</cite> is available below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># the class extends ChildResourceManager</span>
-<span class="nd">@resources.register</span><span class="p">(</span><span class="s1">&#39;sql-database&#39;</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">SqlDatabase</span><span class="p">(</span><span class="n">ChildResourceManager</span><span class="p">):</span>
+<span class="nd">@resources.register</span><span class="p">(</span><span class="s1">&#39;bq-table&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">BigQueryTable</span><span class="p">(</span><span class="n">ChildResourceManager</span><span class="p">):</span>
 
     <span class="c1"># the class extends ChildTypeInfo</span>
     <span class="k">class</span> <span class="nc">resource_type</span><span class="p">(</span><span class="n">ChildTypeInfo</span><span class="p">):</span>
-        <span class="n">service</span> <span class="o">=</span> <span class="s1">&#39;sqladmin&#39;</span>     <span class="c1"># the name of the GCP service</span>
-        <span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;v1beta4&#39;</span>      <span class="c1"># the version of the GCP service</span>
-        <span class="n">component</span> <span class="o">=</span> <span class="s1">&#39;databases&#39;</span>  <span class="c1"># the component of the GCP service</span>
-            <span class="c1"># the `list` method in the resource. https://cloud.google.com/sql/docs/postgres/admin-api/v1beta4/databases/list</span>
-            <span class="c1"># It requires 2 request params: `project` and `instance`. `Project` is set from the environment variable GOOGLE_CLOUD_PROJECT</span>
-            <span class="c1"># `Instance` is set from the parent GCP resource.</span>
-        <span class="n">enum_spec</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">,</span> <span class="s1">&#39;items[]&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-        <span class="nb">id</span> <span class="o">=</span> <span class="s1">&#39;name&#39;</span>
+        <span class="n">service</span> <span class="o">=</span> <span class="s1">&#39;bigquery&#39;</span>  <span class="c1"># the name of the GCP service</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;v2&#39;</span>        <span class="c1"># the version of the GCP service</span>
+        <span class="n">component</span> <span class="o">=</span> <span class="s1">&#39;tables&#39;</span>  <span class="c1"># the component of the GCP service</span>
+            <span class="c1"># The `list` method in the resource. https://cloud.google.com/bigquery/docs/reference/rest/v2/tables/list</span>
+            <span class="c1"># It requires 2 request params: `projectId` and `datasetId`. Since the resource has a parent the params will</span>
+            <span class="c1"># be extracted from parent&#39;s instance</span>
+        <span class="n">enum_spec</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">,</span> <span class="s1">&#39;tables[]&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">scope_key</span> <span class="o">=</span> <span class="s1">&#39;projectId&#39;</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="s1">&#39;id&#39;</span>
         <span class="n">parent_spec</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="c1"># The name of Custodian parent resource.</span>
-            <span class="s1">&#39;resource&#39;</span><span class="p">:</span> <span class="s1">&#39;sql-instance&#39;</span><span class="p">,</span>
+            <span class="c1"># the name of Custodian parent resource.</span>
+            <span class="s1">&#39;resource&#39;</span><span class="p">:</span> <span class="s1">&#39;bq-dataset&#39;</span><span class="p">,</span>
             <span class="s1">&#39;child_enum_params&#39;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="c1"># Each `name` in response from GCP that are loaded</span>
-                <span class="c1">#   using `sql-instance` resource will be used as `instance` for `sql-database` resource</span>
-                <span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;instance&#39;</span><span class="p">)</span>
+                <span class="c1"># Extract the `datasetReference.datasetId` field from a parent instance and use its value</span>
+                <span class="c1"># as the `datasetId` argument for child&#39;s `list` method (see `resource_type.enum_spec`)</span>
+                <span class="p">(</span><span class="s1">&#39;datasetReference.datasetId&#39;</span><span class="p">,</span> <span class="s1">&#39;datasetId&#39;</span><span class="p">),</span>
             <span class="p">],</span>
             <span class="s1">&#39;parent_get_params&#39;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="c1"># The `project` value of `sql-database` resource is used as</span>
-                <span class="c1"># `project` for `sql-instance` resource for a `get` request</span>
-                <span class="p">(</span><span class="s1">&#39;project&#39;</span><span class="p">,</span> <span class="s1">&#39;project&#39;</span><span class="p">),</span>
-                <span class="c1"># The `instance` value of `sql-database` resource is used as</span>
-                <span class="c1"># `name` for `sql-instance` resource for a `get` request</span>
-                <span class="p">(</span><span class="s1">&#39;instance&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">)</span>
+                <span class="c1"># Extract the `tableReference.projectId` field from a child instance and use its value</span>
+                <span class="c1"># as the `projectId` event&#39;s field for parent&#39;s `get` method (see `resource_type.get`)</span>
+                <span class="p">(</span><span class="s1">&#39;tableReference.projectId&#39;</span><span class="p">,</span> <span class="s1">&#39;projectId&#39;</span><span class="p">),</span>
+                <span class="c1"># Similar to above</span>
+                <span class="p">(</span><span class="s1">&#39;tableReference.datasetId&#39;</span><span class="p">,</span> <span class="s1">&#39;datasetId&#39;</span><span class="p">),</span>
             <span class="p">]</span>
         <span class="p">}</span>
+
+        <span class="nd">@staticmethod</span>
+        <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">client</span><span class="o">.</span><span class="n">execute_query</span><span class="p">(</span><span class="s1">&#39;get&#39;</span><span class="p">,</span> <span class="p">{</span>
+                <span class="s1">&#39;projectId&#39;</span><span class="p">:</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;project_id&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;datasetId&#39;</span><span class="p">:</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;dataset_id&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;tableId&#39;</span><span class="p">:</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;resourceName&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="p">})</span>
 </pre></div>
 </div>
 <p>Most resources have get methods that are created based on the corresponding <cite>get</cite> method of the actual GCP resource.

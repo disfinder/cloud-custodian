@@ -149,24 +149,19 @@
 <li class="toctree-l4"><a class="reference internal" href="#actions">Actions</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#gcp-sql-database">gcp.sql-database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gcp-sql-instance">gcp.sql-instance</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id3">Filters</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id4">Actions</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#gcp-sql-instance">gcp.sql-instance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gcp-sql-ssl-cert">gcp.sql-ssl-cert</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id6">Filters</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id7">Actions</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#gcp-sql-ssl-cert">gcp.sql-ssl-cert</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gcp-sql-user">gcp.sql-user</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id9">Filters</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id10">Actions</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gcp-sql-user">gcp.sql-user</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id12">Filters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id13">Actions</a></li>
 </ul>
 </li>
 </ul>
@@ -258,7 +253,6 @@
 <blockquote>
 <div><ul class="simple">
 <li><p><a class="reference internal" href="#gcp-sql-backup-run"><span class="std std-ref">gcp.sql-backup-run</span></a></p></li>
-<li><p><a class="reference internal" href="#gcp-sql-database"><span class="std std-ref">gcp.sql-database</span></a></p></li>
 <li><p><a class="reference internal" href="#gcp-sql-instance"><span class="std std-ref">gcp.sql-instance</span></a></p></li>
 <li><p><a class="reference internal" href="#gcp-sql-ssl-cert"><span class="std std-ref">gcp.sql-ssl-cert</span></a></p></li>
 <li><p><a class="reference internal" href="#gcp-sql-user"><span class="std std-ref">gcp.sql-user</span></a></p></li>
@@ -285,8 +279,8 @@
 </div></blockquote>
 </div>
 </div>
-<div class="section" id="gcp-sql-database">
-<span id="id2"></span><h2>gcp.sql-database<a class="headerlink" href="#gcp-sql-database" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="gcp-sql-instance">
+<span id="id2"></span><h2>gcp.sql-instance<a class="headerlink" href="#gcp-sql-instance" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id3">
 <h3>Filters<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <blockquote>
@@ -298,27 +292,6 @@
 </div>
 <div class="section" id="id4">
 <h3>Actions<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><ul class="simple">
-<li><p><a class="reference internal" href="gcp-common-actions.html#gcp-common-actions-notify"><span class="std std-ref">notify</span></a></p></li>
-<li><p><a class="reference internal" href="gcp-common-actions.html#gcp-common-actions-webhook"><span class="std std-ref">webhook</span></a></p></li>
-</ul>
-</div></blockquote>
-</div>
-</div>
-<div class="section" id="gcp-sql-instance">
-<span id="id5"></span><h2>gcp.sql-instance<a class="headerlink" href="#gcp-sql-instance" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id6">
-<h3>Filters<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><ul class="simple">
-<li><p><a class="reference internal" href="gcp-common-filters.html#gcp-common-filters-event"><span class="std std-ref">event</span></a></p></li>
-<li><p><a class="reference internal" href="gcp-common-filters.html#gcp-common-filters-value"><span class="std std-ref">value</span></a></p></li>
-</ul>
-</div></blockquote>
-</div>
-<div class="section" id="id7">
-<h3>Actions<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p><a class="reference internal" href="#gcp-sql-instance-actions-delete"><span class="std std-ref">delete</span></a></p></li>
@@ -366,7 +339,28 @@ an encapsulation of the 80%.</p>
 </div>
 </div>
 <div class="section" id="gcp-sql-ssl-cert">
-<span id="id8"></span><h2>gcp.sql-ssl-cert<a class="headerlink" href="#gcp-sql-ssl-cert" title="Permalink to this headline">¶</a></h2>
+<span id="id5"></span><h2>gcp.sql-ssl-cert<a class="headerlink" href="#gcp-sql-ssl-cert" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h3>Filters<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="gcp-common-filters.html#gcp-common-filters-event"><span class="std std-ref">event</span></a></p></li>
+<li><p><a class="reference internal" href="gcp-common-filters.html#gcp-common-filters-value"><span class="std std-ref">value</span></a></p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id7">
+<h3>Actions<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="gcp-common-actions.html#gcp-common-actions-notify"><span class="std std-ref">notify</span></a></p></li>
+<li><p><a class="reference internal" href="gcp-common-actions.html#gcp-common-actions-webhook"><span class="std std-ref">webhook</span></a></p></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="gcp-sql-user">
+<span id="id8"></span><h2>gcp.sql-user<a class="headerlink" href="#gcp-sql-user" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id9">
 <h3>Filters<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <blockquote>
@@ -378,27 +372,6 @@ an encapsulation of the 80%.</p>
 </div>
 <div class="section" id="id10">
 <h3>Actions<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><ul class="simple">
-<li><p><a class="reference internal" href="gcp-common-actions.html#gcp-common-actions-notify"><span class="std std-ref">notify</span></a></p></li>
-<li><p><a class="reference internal" href="gcp-common-actions.html#gcp-common-actions-webhook"><span class="std std-ref">webhook</span></a></p></li>
-</ul>
-</div></blockquote>
-</div>
-</div>
-<div class="section" id="gcp-sql-user">
-<span id="id11"></span><h2>gcp.sql-user<a class="headerlink" href="#gcp-sql-user" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id12">
-<h3>Filters<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><ul class="simple">
-<li><p><a class="reference internal" href="gcp-common-filters.html#gcp-common-filters-event"><span class="std std-ref">event</span></a></p></li>
-<li><p><a class="reference internal" href="gcp-common-filters.html#gcp-common-filters-value"><span class="std std-ref">value</span></a></p></li>
-</ul>
-</div></blockquote>
-</div>
-<div class="section" id="id13">
-<h3>Actions<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p><a class="reference internal" href="gcp-common-actions.html#gcp-common-actions-notify"><span class="std std-ref">notify</span></a></p></li>
