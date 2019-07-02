@@ -43,6 +43,9 @@ auto-tag-user
 
 Attempts to tag a resource with the first user who created/modified it.
 
+:example:
+This policy will tag all existing resource groups with the 'CreatorEmail' tag
+
 .. code-block:: yaml
 
   policies:
@@ -90,7 +93,45 @@ Note: activity logs are only held for the last 90 days.
 delete
 ++++++
 
-Delete a resource.
+Perform delete operation on any ARM resource. Can be used with
+generic resource type `armresource` or on any other more specific
+ARM resource type supported by Cloud Custodian.
+
+:example:
+This policy will delete any ARM resource with 'test' in the name
+
+.. code-block:: yaml
+
+        policies:
+          - name: delete-test-resources
+            resource: azure.armresource
+            description: |
+              Deletes any ARM resource with 'test' in the name
+            filters:
+              - type: value
+                key: name
+                value: test
+                op: contains
+            actions:
+             - type: delete
+
+:example:
+This policy will delete any Network Security Group  with 'test' in the name
+
+.. code-block:: yaml
+
+        policies:
+           - name: delete-test-nsg
+             description: |
+               Deletes any Network Security Group with 'test' in the name
+             resource: azure.networksecuritygroup
+             filters:
+               - type: value
+                 key: name
+                 value: test
+                 op: contains
+             actions:
+              - type: delete
 
 .. container:: toggle
 
@@ -167,22 +208,27 @@ azure-resource-manager/resource-group-lock-resources#who-can-create-or-delete-lo
 logic-app
 +++++++++
 
-Calls an Azure Logic App with optional parameters
-and body populated from JMESPath queries.
+Calls an Azure Logic App with optional parameters and body populated from JMESPath queries.
+Your policy credentials are used to get the trigger endpoint URL with secrets
+using the resource group and app name.
 
- .. code-block:: yaml
+This action is based on the ``webhook`` action and supports the same options.
 
-   policies:
-     - name: call-logic-app
-       resource: azure.vm
-       description: |
-         Call logic app with list of VM's
-       actions:
-        - type: logic-app
-          resource-group: custodian-test
-          logic-app-name: cclogicapp
-          batch: true
-          body: 'resources[].{ vm_name: name }'
+:example: This policy will call logic app with list of VM's
+
+    .. code-block:: yaml
+
+      policies:
+        - name: call-logic-app
+          resource: azure.vm
+          description: |
+            Call logic app with list of VM's
+          actions:
+           - type: logic-app
+             resource-group: custodian-test
+             logic-app-name: cclogicapp
+             batch: true
+             body: 'resources[].{ vm_name: name }'
 
 .. container:: toggle
 
@@ -247,18 +293,20 @@ with a given timezone. The default value is 'utc'.
 If neither 'days' nor 'hours' is specified, Cloud Custodian will default
 to marking the resource for action 4 days in the future.
 
-.. code-block :: yaml
+:example:
 
-   policies:
-    - name: vm-mark-for-stop
-      resource: azure.vm
-      filters:
-        - type: value
-          key: Name
-          value: instance-to-stop-in-four-days
-      actions:
-        - type: mark-for-op
-          op: stop
+    .. code-block :: yaml
+
+       policies:
+        - name: vm-mark-for-stop
+          resource: azure.vm
+          filters:
+            - type: value
+              key: Name
+              value: instance-to-stop-in-four-days
+          actions:
+            - type: mark-for-op
+              op: stop
 
 .. container:: toggle
 
@@ -300,8 +348,27 @@ to marking the resource for action 4 days in the future.
 notify
 ++++++
 
-Actions which receive lambda event if present
-    
+Action to queue email.
+
+See `c7n_mailer readme.md <https://github.com/cloud-custodian/cloud-custodian/blob/
+master/tools/c7n_mailer/README.md#using-on-azure>`_for more information.
+
+:example:
+
+.. code-block:: yaml
+
+    policies:
+      - name: notify
+        resource: azure.resourcegroup
+        actions:
+          - type: notify
+            template: default
+            subject: Hello World
+            to:
+              - someone@somewhere.com
+            transport:
+              type: asq
+              queue: https://storagename.queue.core.windows.net/queuename
 
 .. container:: toggle
 
@@ -387,17 +454,19 @@ tag
 
 Adds tags to Azure resources
 
-.. code-block:: yaml
+:example: This policy will tag all existing resource groups with a value such as Environment
 
-  policies:
-    - name: azure-tag-resourcegroups
-      resource: azure.resourcegroup
-      description: |
-        Tag all existing resource groups with a value such as Environment
-      actions:
-       - type: tag
-         tag: Environment
-         value: Test
+    .. code-block:: yaml
+
+      policies:
+        - name: azure-tag-resourcegroups
+          resource: azure.resourcegroup
+          description: |
+            Tag all existing resource groups with a value such as Environment
+          actions:
+           - type: tag
+             tag: Environment
+             value: Test
 
 .. container:: toggle
 
@@ -437,6 +506,7 @@ desired amount of space while preserving a given set of tags.
 Setting the space value to 0 removes all tags but those
 listed to preserve.
 
+:example:
 .. code-block :: yaml
 
    policies:
@@ -499,16 +569,19 @@ untag
 
 Removes tags from Azure resources
 
-.. code-block:: yaml
+:example:
+This policy will remove tag for all existing resource groups with a key such as Environment
 
-  policies:
-    - name: azure-remove-tag-resourcegroups
-      resource: azure.resourcegroup
-      description: |
-        Remove tag for all existing resource groups with a key such as Environment
-      actions:
-       - type: untag
-         tags: ['Environment']
+    .. code-block:: yaml
+
+      policies:
+        - name: azure-remove-tag-resourcegroups
+          resource: azure.resourcegroup
+          description: |
+            Remove tag for all existing resource groups with a key such as Environment
+          actions:
+           - type: untag
+             tags: ['Environment']
 
 .. container:: toggle
 

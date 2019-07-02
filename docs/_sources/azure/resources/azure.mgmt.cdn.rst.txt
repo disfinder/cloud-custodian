@@ -9,7 +9,22 @@ azure.azure.mgmt.cdn resources
 azure.cdnprofile
 ================
 
+CDN Resource
 
+:example:
+Returns all CDNs with Standard_Verizon sku
+
+.. code-block:: yaml
+
+    policies:
+      - name: standard-verizon
+        resource: azure.cdnprofile
+        filters:
+          - type: value
+            key: sku
+            op: in
+            value_type: normalize
+            value: Standard_Verizon
 
 Filters
 -------

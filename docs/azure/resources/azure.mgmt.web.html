@@ -344,6 +344,45 @@
 </div>
 <div class="section" id="azure-webapp">
 <span id="id2"></span><h2>azure.webapp<a class="headerlink" href="#azure-webapp" title="Permalink to this headline">¶</a></h2>
+<p>Web Applications Resource</p>
+<dl class="field-list simple">
+<dt class="field-odd">example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>This policy will find all web apps with 10 or less requests over the last 72 hours</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">webapp-dropping-messages</span>
+    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.webapp</span>
+    <span class="nt">filters</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">metric</span>
+        <span class="nt">metric</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Requests</span>
+        <span class="nt">op</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">le</span>
+        <span class="nt">aggregation</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">total</span>
+        <span class="nt">threshold</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
+        <span class="nt">timeframe</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">72</span>
+    <span class=" -Error"> </span><span class="nt">actions</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mark-for-op</span>
+        <span class="nt">op</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">delete</span>
+        <span class="nt">days</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">7</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>This policy will find all web apps with 1000 or more server errors over the last 72 hours</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">webapp-high-error-count</span>
+    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.webapp</span>
+    <span class="nt">filters</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">metric</span>
+        <span class="nt">metric</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Http5xxx</span>
+        <span class="nt">op</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ge</span>
+        <span class="nt">aggregation</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">total</span>
+        <span class="nt">threshold</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
+        <span class="nt">timeframe</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">72</span>
+</pre></div>
+</div>
 <div class="section" id="id3">
 <h3>Filters<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <blockquote>

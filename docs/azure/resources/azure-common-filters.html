@@ -268,6 +268,48 @@
 </div></blockquote>
 <div class="section" id="diagnostic-settings">
 <span id="azure-common-filters-diagnostic-settings"></span><h2>diagnostic-settings<a class="headerlink" href="#diagnostic-settings" title="Permalink to this headline">¶</a></h2>
+<p>The diagnostic settings filter is implicitly just the ValueFilter
+on the diagnostic settings for an azure resource.</p>
+<dl class="field-list simple">
+<dt class="field-odd">example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>Find Load Balancers that have logs for both LoadBalancerProbeHealthStatus category and
+LoadBalancerAlertEvent category enabled.
+The use of value_type: swap is important for these examples because it swaps the value
+and the evaluated key so that it evaluates the value provided is in the logs.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">policies</span>
+  <span class="l l-Scalar l-Scalar-Plain">- name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">find-load-balancers-with-logs-enabled</span>
+    <span class="l l-Scalar l-Scalar-Plain">resource</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.loadbalancer</span>
+    <span class="l l-Scalar l-Scalar-Plain">filters</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">diagnostic-settings</span>
+        <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">logs[?category == &#39;LoadBalancerProbeHealthStatus&#39;][].enabled</span>
+        <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+        <span class="nt">op</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">in</span>
+        <span class="nt">value_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">swap</span>
+      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">diagnostic-settings</span>
+        <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">logs[?category == &#39;LoadBalancerAlertEvent&#39;][].enabled</span>
+        <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+        <span class="nt">op</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">in</span>
+        <span class="nt">value_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">swap</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>Find KeyVaults that have logs enabled for the AuditEvent category.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">policies</span>
+  <span class="l l-Scalar l-Scalar-Plain">- name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">find-keyvaults-with-logs-enabled</span>
+    <span class="l l-Scalar l-Scalar-Plain">resource</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.keyvault</span>
+    <span class="l l-Scalar l-Scalar-Plain">filters</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">diagnostic-settings</span>
+        <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">logs[?category == &#39;AuditEvent&#39;][].enabled</span>
+        <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+        <span class="nt">op</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">in</span>
+        <span class="nt">value_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">swap</span>
+</pre></div>
+</div>
 <div class="toggle docutils container">
 <div class="header docutils container" style=""></div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">properties</span><span class="p">:</span>
   <span class="nt">default</span><span class="p">:</span>
@@ -562,6 +604,10 @@ instance, or snapshotting a volume prior to deletion.</p>
 time a number of hours into the future.</p>
 <p>Optionally, the ‘tz’ parameter can get used to specify the timezone
 in which to interpret the clock (default value is ‘utc’)</p>
+<dl class="field-list simple">
+<dt class="field-odd">example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">vm-stop-marked</span>
    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.vm</span>
@@ -573,8 +619,6 @@ in which to interpret the clock (default value is ‘utc’)</p>
        <span class="nt">op</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">stop</span>
        <span class="c1"># Another optional tag is skew</span>
        <span class="nt">tz</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">utc</span>
-   <span class="nt">actions</span><span class="p">:</span>
-     <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">stop</span>
 </pre></div>
 </div>
 <div class="toggle docutils container">
@@ -618,6 +662,42 @@ in which to interpret the clock (default value is ‘utc’)</p>
         <span class="nt">op</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gt</span>
         <span class="nt">threshold</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">75</span>
         <span class="nt">timeframe</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">example</dt>
+<dd class="field-odd"><p>Find KeyVaults with more than 1000 API hits in the last hour</p>
+</dd>
+</dl>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">keyvault-hits</span>
+    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.keyvault</span>
+    <span class="nt">filters</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">metric</span>
+        <span class="nt">metric</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ServiceApiHit</span>
+        <span class="nt">aggregation</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">total</span>
+        <span class="nt">op</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gt</span>
+        <span class="nt">threshold</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
+        <span class="nt">timeframe</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>Find SQL servers with less than 10% average DTU consumption
+across all databases over last 24 hours</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">dtu-consumption</span>
+    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.sqlserver</span>
+    <span class="nt">filters</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">metric</span>
+        <span class="nt">metric</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">dtu_consumption_percent</span>
+        <span class="nt">aggregation</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">average</span>
+        <span class="nt">op</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">lt</span>
+        <span class="nt">threshold</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
+        <span class="nt">timeframe</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">24</span>
+        <span class="nt">filter</span><span class="p">:</span>  <span class="s">&quot;DatabaseResourceId</span><span class="nv"> </span><span class="s">eq</span><span class="nv"> </span><span class="s">&#39;*&#39;&quot;</span>
 </pre></div>
 </div>
 <div class="toggle docutils container">
