@@ -42,6 +42,8 @@ be applies for all resources.
 
    azure.mgmt.datalake.store.rst
 
+   azure.mgmt.dns.rst
+
    azure.mgmt.eventgrid.rst
 
    azure.mgmt.iothub.rst

@@ -1,0 +1,133 @@
+azure.azure.mgmt.dns resources
+##############################
+
+
+
+  - :ref:`azure.dnszone <azure.dnszone>`
+
+  - :ref:`azure.recordset <azure.recordset>`
+
+
+
+
+.. _azure.dnszone:
+
+azure.dnszone
+=============
+
+DNS Zone Resource
+
+:example:
+
+Finds all DNS Zones in the subscription
+
+.. code-block:: yaml
+
+    policies:
+        - name: find-all-dns-zones
+          resource: azure.dnszone
+
+Filters
+-------
+
+
+  - :ref:`diagnostic-settings <azure.common.filters.diagnostic-settings>`
+  
+  - :ref:`event <azure.common.filters.event>`
+  
+  - :ref:`marked-for-op <azure.common.filters.marked-for-op>`
+  
+  - :ref:`metric <azure.common.filters.metric>`
+  
+  - :ref:`policy-compliant <azure.common.filters.policy-compliant>`
+  
+  - :ref:`resource-lock <azure.common.filters.resource-lock>`
+  
+  - :ref:`value <azure.common.filters.value>`
+  
+
+
+
+
+Actions
+-------
+
+
+  - :ref:`auto-tag-user <azure.common.actions.auto-tag-user>`
+  
+  - :ref:`delete <azure.common.actions.delete>`
+  
+  - :ref:`lock <azure.common.actions.lock>`
+  
+  - :ref:`logic-app <azure.common.actions.logic-app>`
+  
+  - :ref:`mark-for-op <azure.common.actions.mark-for-op>`
+  
+  - :ref:`notify <azure.common.actions.notify>`
+  
+  - :ref:`tag <azure.common.actions.tag>`
+  
+  - :ref:`tag-trim <azure.common.actions.tag-trim>`
+  
+  - :ref:`untag <azure.common.actions.untag>`
+  
+  - :ref:`webhook <azure.common.actions.webhook>`
+  
+
+
+
+
+.. _azure.recordset:
+
+azure.recordset
+===============
+
+Record Set Resource
+
+:example:
+
+Finds all Record Sets for all DNS Zones in the subscription
+
+.. code-block:: yaml
+
+    policies:
+        - name: find-all-record-sets
+          resource: azure.recordset
+
+Filters
+-------
+
+
+  - :ref:`diagnostic-settings <azure.common.filters.diagnostic-settings>`
+  
+  - :ref:`event <azure.common.filters.event>`
+  
+  - :ref:`metric <azure.common.filters.metric>`
+  
+  - :ref:`policy-compliant <azure.common.filters.policy-compliant>`
+  
+  - :ref:`resource-lock <azure.common.filters.resource-lock>`
+  
+  - :ref:`value <azure.common.filters.value>`
+  
+
+
+
+
+Actions
+-------
+
+
+  - :ref:`delete <azure.common.actions.delete>`
+  
+  - :ref:`lock <azure.common.actions.lock>`
+  
+  - :ref:`logic-app <azure.common.actions.logic-app>`
+  
+  - :ref:`notify <azure.common.actions.notify>`
+  
+  - :ref:`webhook <azure.common.actions.webhook>`
+  
+
+
+
