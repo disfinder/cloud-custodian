@@ -278,6 +278,7 @@
 <li><p><a class="reference internal" href="azure-common-actions.html#azure-common-actions-logic-app"><span class="std std-ref">logic-app</span></a></p></li>
 <li><p><a class="reference internal" href="azure-common-actions.html#azure-common-actions-mark-for-op"><span class="std std-ref">mark-for-op</span></a></p></li>
 <li><p><a class="reference internal" href="azure-common-actions.html#azure-common-actions-notify"><span class="std std-ref">notify</span></a></p></li>
+<li><p><a class="reference internal" href="#azure-storage-actions-set-log-settings"><span class="std std-ref">set-log-settings</span></a></p></li>
 <li><p><a class="reference internal" href="#azure-storage-actions-set-network-rules"><span class="std std-ref">set-network-rules</span></a></p></li>
 <li><p><a class="reference internal" href="azure-common-actions.html#azure-common-actions-tag"><span class="std std-ref">tag</span></a></p></li>
 <li><p><a class="reference internal" href="azure-common-actions.html#azure-common-actions-tag-trim"><span class="std std-ref">tag-trim</span></a></p></li>
@@ -285,6 +286,63 @@
 <li><p><a class="reference internal" href="azure-common-actions.html#azure-common-actions-webhook"><span class="std std-ref">webhook</span></a></p></li>
 </ul>
 </div></blockquote>
+<div class="section" id="set-log-settings">
+<span id="azure-storage-actions-set-log-settings"></span><h4>set-log-settings<a class="headerlink" href="#set-log-settings" title="Permalink to this headline">¶</a></h4>
+<p>Action that updates the logging settings on storage accounts. The action requires
+specifying an array of storage types that will be impacted by the action (blob, queue, table),
+retention (number in days; 0-365), and an array of log settings to enable (read, write, delete).
+The action will disable any settings not listed (e.g. by providing log: [write, delete], the
+action will disable read).</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">example</dt>
+<dd class="field-odd"><p>Enable write and delete logging and disable read logging on blob storage,
+and retain logs for 5 days.</p>
+</dd>
+</dl>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">enable-blob-storage-logging</span>
+      <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.storage</span>
+      <span class="nt">actions</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">set-log-settings</span>
+          <span class="nt">storage-types</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">blob</span><span class="p p-Indicator">]</span>
+          <span class="nt">retention</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
+          <span class="nt">log</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">write</span><span class="p p-Indicator">,</span> <span class="nv">delete</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="toggle docutils container">
+<div class="header docutils container" style=""></div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">properties</span><span class="p">:</span>
+  <span class="nt">log</span><span class="p">:</span>
+    <span class="nt">items</span><span class="p">:</span>
+      <span class="nt">enum</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">read</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">write</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">delete</span>
+      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">array</span>
+  <span class="nt">retention</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">number</span>
+  <span class="nt">storage-types</span><span class="p">:</span>
+    <span class="nt">items</span><span class="p">:</span>
+      <span class="nt">enum</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">blob</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">queue</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">table</span>
+      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">array</span>
+  <span class="nt">type</span><span class="p">:</span>
+    <span class="nt">enum</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">set-log-settings</span>
+<span class="nt">required</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">storage-types</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">log</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">retention</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="set-network-rules">
 <span id="azure-storage-actions-set-network-rules"></span><h4>set-network-rules<a class="headerlink" href="#set-network-rules" title="Permalink to this headline">¶</a></h4>
 <p>Set Network Rules Action</p>

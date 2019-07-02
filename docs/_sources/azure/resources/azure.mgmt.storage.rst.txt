@@ -61,6 +61,8 @@ Actions
   
   - :ref:`notify <azure.common.actions.notify>`
   
+  - :ref:`set-log-settings <azure.storage.actions.set-log-settings>`
+
   - :ref:`set-network-rules <azure.storage.actions.set-network-rules>`
 
   - :ref:`tag <azure.common.actions.tag>`
@@ -72,6 +74,71 @@ Actions
   - :ref:`webhook <azure.common.actions.webhook>`
   
 
+
+
+.. _azure.storage.actions.set-log-settings:
+
+set-log-settings
+++++++++++++++++
+Action that updates the logging settings on storage accounts. The action requires
+specifying an array of storage types that will be impacted by the action (blob, queue, table),
+retention (number in days; 0-365), and an array of log settings to enable (read, write, delete).
+The action will disable any settings not listed (e.g. by providing log: [write, delete], the
+action will disable read).
+
+ :example:
+
+    Enable write and delete logging and disable read logging on blob storage,
+    and retain logs for 5 days.
+
+ .. code-block:: yaml
+
+    policies:
+        - name: enable-blob-storage-logging
+          resource: azure.storage
+          actions:
+            - type: set-log-settings
+              storage-types: [blob]
+              retention: 5
+              log: [write, delete]
+
+.. container:: toggle
+
+  
+
+  .. raw:: html
+     
+    <div class="header docutils container" style=""></div>
+
+  .. code-block:: yaml
+
+    properties:
+      log:
+        items:
+          enum:
+          - read
+          - write
+          - delete
+          type: string
+        type: array
+      retention:
+        type: number
+      storage-types:
+        items:
+          enum:
+          - blob
+          - queue
+          - table
+          type: string
+        type: array
+      type:
+        enum:
+        - set-log-settings
+    required:
+    - storage-types
+    - log
+    - retention
+    - type
 
 
 .. _azure.storage.actions.set-network-rules:
