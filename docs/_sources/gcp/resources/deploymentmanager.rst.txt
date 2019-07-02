@@ -9,7 +9,8 @@ gcp.deploymentmanager resources
 gcp.dm-deployment
 =================
 
-
+GCP resource: https://cloud.google.com/deployment-manager/docs/reference/latest/deployments
+    
 
 Filters
 -------
@@ -27,10 +28,53 @@ Actions
 -------
 
 
+  - :ref:`delete <gcp.dm-deployment.actions.delete>`
+
   - :ref:`notify <gcp.common.actions.notify>`
   
   - :ref:`webhook <gcp.common.actions.webhook>`
   
 
+
+
+.. _gcp.dm-deployment.actions.delete:
+
+delete
+++++++
+Deletes a deployment
+
+:Example:
+
+.. code-block:: yaml
+    policies:
+      - name: delete-deployments
+        description: Delete all deployments
+        resource: gcp.dm-deployment
+        filters:
+          - type: value
+            key: name
+            op: eq
+            value: test-deployment
+        actions:
+          - delete
+
+https://cloud.google.com/deployment-manager/docs/reference/latest/deployments/delete
+
+.. container:: toggle
+
+  
+
+  .. raw:: html
+     
+    <div class="header docutils container" style=""></div>
+
+  .. code-block:: yaml
+
+    properties:
+      type:
+        enum:
+        - delete
+    required:
+    - type
 
 

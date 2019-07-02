@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>App Engine - Check if a blacklisted domain is still in use &mdash; Cloud Custodian  documentation</title>
+  <title>Deployment Manager - Find expired deployments &mdash; Cloud Custodian  documentation</title>
   
 
   
@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../../_static/css/expand.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="App Engine - Check if a Firewall Rule is in Place" href="appengine-firewall-ingress-rule.html" />
-    <link rel="prev" title="App Engine - Check if an SSL Certificate is About to Expire" href="appengine-certificates.html" /> 
+    <link rel="next" title="DNS - Notify if DNS Managed Zone has no DNSSEC" href="dns-managed-zone.html" />
+    <link rel="prev" title="Dataflow - Check for Hanged Jobs" href="dataflow-job.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -119,10 +119,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../gcp-modes.html">GCP Modes</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="appengine-certificates.html">App Engine - Check if an SSL Certificate is About to Expire</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">App Engine - Check if a blacklisted domain is still in use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appengine-domain.html">App Engine - Check if a blacklisted domain is still in use</a></li>
 <li class="toctree-l2"><a class="reference internal" href="appengine-firewall-ingress-rule.html">App Engine - Check if a Firewall Rule is in Place</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dataflow-job.html">Dataflow -  Check for Hanged Jobs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dm-deployments.html">Deployment Manager - Find expired deployments</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Deployment Manager - Find expired deployments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dns-managed-zone.html">DNS - Notify if DNS Managed Zone has no DNSSEC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dns-policy.html">DNS - Notify if Logging is Disabled in DNS Policy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="loadbalancer-network-tiers.html">Load Balancer - Network Tiers</a></li>
@@ -201,7 +201,7 @@
         
           <li><a href="index.html">Examples</a> &raquo;</li>
         
-      <li>App Engine - Check if a blacklisted domain is still in use</li>
+      <li>Deployment Manager - Find expired deployments</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -218,33 +218,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="app-engine-check-if-a-blacklisted-domain-is-still-in-use">
-<h1>App Engine - Check if a blacklisted domain is still in use<a class="headerlink" href="#app-engine-check-if-a-blacklisted-domain-is-still-in-use" title="Permalink to this headline">¶</a></h1>
-<p>Custodian can check and notify if there are user-defined blacklisted domains in use. Note that the <code class="docutils literal notranslate"><span class="pre">notify</span></code> action requires a Pub/Sub topic to be configured.</p>
-<p>In the example below, the policy checks if there are any domains contained in the <code class="docutils literal notranslate"><span class="pre">&amp;blacklisted-domains</span></code> variable.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">vars</span><span class="p">:</span>
-  <span class="nt">blacklisted-domains-in-use</span><span class="p">:</span> <span class="nl">&amp;blacklisted-domains</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">appengine-de.mo</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gcp-li.ga</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">whatever.com</span>
-<span class="nt">policies</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gcp-app-engine-domain-notify-if-blacklisted-in-use</span>
-    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gcp.app-engine-domain</span>
+  <div class="section" id="deployment-manager-find-expired-deployments">
+<h1>Deployment Manager - Find expired deployments<a class="headerlink" href="#deployment-manager-find-expired-deployments" title="Permalink to this headline">¶</a></h1>
+<p>Custodian can check and delete deployments that have reached their expiration date which is in turn determined by your governance rules.</p>
+<p>In the example below, the policy is set to delete deployments which were created more than 6 days ago.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">expired-deployments</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Finds expired deployments</span>
+    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gcp.dm-deployment</span>
     <span class="nt">filters</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value</span>
-        <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">id</span>
-        <span class="nt">op</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">in</span>
-        <span class="nt">value</span><span class="p">:</span> <span class="nv">*blacklisted-domains</span>
+    <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value</span>
+      <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">insertTime</span>
+      <span class="nt">value_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">expiration</span>
+      <span class="nt">op</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gte</span>
+      <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">7</span>
     <span class="nt">actions</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">notify</span>
-        <span class="nt">subject</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Blacklisted domains still in use</span>
-        <span class="nt">to</span><span class="p">:</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">email@address</span>
-        <span class="nt">subject</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Domains no longer in use</span>
-        <span class="nt">format</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">txt</span>
-        <span class="nt">transport</span><span class="p">:</span>
-          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pubsub</span>
-          <span class="nt">topic</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">projects/my-gcp-project/topics/my-topic</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">delete</span>
 </pre></div>
 </div>
 </div>
@@ -257,10 +246,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="appengine-firewall-ingress-rule.html" class="btn btn-neutral float-right" title="App Engine - Check if a Firewall Rule is in Place" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="dns-managed-zone.html" class="btn btn-neutral float-right" title="DNS - Notify if DNS Managed Zone has no DNSSEC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="appengine-certificates.html" class="btn btn-neutral float-left" title="App Engine - Check if an SSL Certificate is About to Expire" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="dataflow-job.html" class="btn btn-neutral float-left" title="Dataflow - Check for Hanged Jobs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
