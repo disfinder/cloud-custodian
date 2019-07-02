@@ -16,6 +16,8 @@ be applies for all resources.
 
    azure-common-filters.rst
 
+   .rst
+
    azure.keyvault.rst
 
    azure.mgmt.apimanagement.rst
