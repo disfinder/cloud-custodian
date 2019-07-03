@@ -18,6 +18,7 @@ azure.aks
 Azure Kubernetes Service Resource
 
 :example:
+
 Returns all aks clusters that did not provision successfully
 
 .. code-block:: yaml
@@ -90,6 +91,7 @@ azure.containerservice
 Container Service Resource
 
 :example:
+
 Returns all container services that did not provision successfully
 
 .. code-block:: yaml

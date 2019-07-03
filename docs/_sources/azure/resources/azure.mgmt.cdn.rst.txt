@@ -12,6 +12,7 @@ azure.cdnprofile
 CDN Resource
 
 :example:
+
 Returns all CDNs with Standard_Verizon sku
 
 .. code-block:: yaml

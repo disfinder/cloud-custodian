@@ -289,9 +289,9 @@ of these backups has a retention period that can specified in units of days, wee
 months, or years.</p>
 <dl class="field-list simple">
 <dt class="field-odd">example</dt>
-<dd class="field-odd"><p>Find all SQL Databases with weekly backup retentions longer than 1 month.</p>
-</dd>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<p>Find all SQL Databases with weekly backup retentions longer than 1 month.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">long-term-backup-retention-policy</span>
     <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.sqldatabase</span>
@@ -356,9 +356,9 @@ months, or years.</p>
 it has a backup retention of zero days.</p>
 <dl class="field-list simple">
 <dt class="field-odd">example</dt>
-<dd class="field-odd"><p>Find all SQL Databases with a short term retention policy shorter than 2 weeks.</p>
-</dd>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<p>Find all SQL Databases with a short term retention policy shorter than 2 weeks.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">short-term-backup-retention-policy</span>
     <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.sqldatabase</span>
@@ -424,9 +424,9 @@ of these backups has a retention period that can specified in units of days, wee
 months, or years.</p>
 <dl class="field-list simple">
 <dt class="field-odd">example</dt>
-<dd class="field-odd"><p>Enforce a 1 month maximum retention for weekly backups on all SQL Databases</p>
-</dd>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<p>Enforce a 1 month maximum retention for weekly backups on all SQL Databases</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">update-long-term-backup-retention-policy</span>
     <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.sqldatabase</span>
@@ -478,9 +478,9 @@ months, or years.</p>
 <p>Update the short term backup retention policy for a SQL Database.</p>
 <dl class="field-list simple">
 <dt class="field-odd">example</dt>
-<dd class="field-odd"><p>Update any SQL Database short term retentions to at least 7 days.</p>
-</dd>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<p>Update any SQL Database short term retentions to at least 7 days.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">update-short-term-backup-retention-policy</span>
     <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.sqldatabase</span>

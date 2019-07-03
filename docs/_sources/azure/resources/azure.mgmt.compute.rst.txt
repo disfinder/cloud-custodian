@@ -22,6 +22,7 @@ azure.disk
 Disk Resource
 
 :example:
+
 This policy will disks that are not being managed by a VM
 
 .. code-block:: yaml
@@ -92,6 +93,7 @@ azure.image
 Virtual Machine Image
 
 :example:
+
 Returns all virtual machine images named my-test-vm-image
 
 .. code-block:: yaml
@@ -163,6 +165,7 @@ azure.vm
 Virtual Machine Resource
 
 :example:
+
 Stop all running VMs
 
 .. code-block:: yaml
@@ -180,6 +183,7 @@ Stop all running VMs
           - type: stop
 
 :example:
+
 Start all VMs
 
 .. code-block:: yaml
@@ -191,6 +195,7 @@ Start all VMs
           - type: start
 
 :example:
+
 Restart all VMs
 
 .. code-block:: yaml
@@ -202,6 +207,7 @@ Restart all VMs
           - type: restart
 
 :example:
+
 Delete specific VM by name
 
 .. code-block:: yaml
@@ -219,6 +225,7 @@ Delete specific VM by name
           - type: delete
 
 :example:
+
 Find all VMs with a Public IP address
 
 .. code-block:: yaml
@@ -232,6 +239,7 @@ Find all VMs with a Public IP address
             value: not-null
 
 :example:
+
 This policy will find all VMs that have Percentage CPU usage >= 75% over the last 72 hours
 
 .. code-block:: yaml
@@ -248,6 +256,7 @@ This policy will find all VMs that have Percentage CPU usage >= 75% over the las
             timeframe: 72
 
 :example:
+
 This policy will find all VMs that have Percentage CPU usage <= 1% over the last 72 hours,
 mark for deletion in 7 days
 
@@ -528,6 +537,7 @@ azure.vmss
 Virtual Machine Scale Set Resource
 
 :example:
+
 This policy will find all VM Scale Sets that are set to overprovision
 
 .. code-block:: yaml

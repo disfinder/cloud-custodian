@@ -26,6 +26,7 @@ azure.loadbalancer
 Load Balancer Resource
 
 :example:
+
 This policy will filter load balancers with an ipv6 frontend public IP
 
 .. code-block:: yaml
@@ -41,6 +42,7 @@ This policy will filter load balancers with an ipv6 frontend public IP
               value: "ipv6"
 
 :example:
+
 This policy will find all load balancers with 1000 or less transmitted packets
 over the last 72 hours
 
@@ -85,7 +87,7 @@ frontend-public-ip
 ++++++++++++++++++
 Filters load balancers by frontend public ip.
 
-:Example:
+:example:
 
     .. code-block:: yaml
 
@@ -223,6 +225,7 @@ azure.networkinterface
 Network Interface Resource
 
 :example:
+
 This policy will get Network Interfaces that have User added routes.
 
 .. code-block:: yaml
@@ -389,6 +392,7 @@ azure.networksecuritygroup
 Network Security Group Resource
 
 :example:
+
 This policy will deny access to all ports that are NOT 22, 23 or 24
 for all Network Security Groups
 
@@ -408,6 +412,7 @@ for all Network Security Groups
             direction: 'Inbound'
 
 :example:
+
 This policy will find all NSGs with port 80 opened and port 443 closed,
 then it will open port 443
 
@@ -793,6 +798,7 @@ azure.vnet
 Virtual Networks Resource
 
 :example:
+
 This set of policies will find all Virtual Networks that do not have DDOS protection enabled.
 
 .. code-block:: yaml

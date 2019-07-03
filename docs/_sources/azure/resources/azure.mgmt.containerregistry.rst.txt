@@ -12,6 +12,7 @@ azure.containerregistry
 Container Registry Resource
 
 :example:
+
 Returns all container registry named my-test-container-registry
 
 .. code-block:: yaml

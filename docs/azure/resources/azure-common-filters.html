@@ -649,9 +649,9 @@ in which to interpret the clock (default value is ‘utc’)</p>
 <p>Filters Azure resources based on live metrics from the Azure monitor</p>
 <dl class="field-list simple">
 <dt class="field-odd">example</dt>
-<dd class="field-odd"><p>Find all VMs with an average Percentage CPU greater than 75% over last 2 hours</p>
-</dd>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<p>Find all VMs with an average Percentage CPU greater than 75% over last 2 hours</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">vm-percentage-cpu</span>
     <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.vm</span>
@@ -666,9 +666,9 @@ in which to interpret the clock (default value is ‘utc’)</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">example</dt>
-<dd class="field-odd"><p>Find KeyVaults with more than 1000 API hits in the last hour</p>
-</dd>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<p>Find KeyVaults with more than 1000 API hits in the last hour</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">keyvault-hits</span>
     <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.keyvault</span>
@@ -1005,9 +1005,9 @@ Lock type is optional, by default any lock will be applied to the filter.
 To get unlocked resources, use “Absent” type.</p>
 <dl class="field-list simple">
 <dt class="field-odd">example</dt>
-<dd class="field-odd"><p>Get all keyvaults with ReadOnly lock:</p>
-</dd>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<p>Get all keyvaults with ReadOnly lock:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">locked-keyvaults</span>
    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.keyvault</span>
@@ -1018,9 +1018,9 @@ To get unlocked resources, use “Absent” type.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">example</dt>
-<dd class="field-odd"><p>Get all locked sqldatabases (any type of lock):</p>
-</dd>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<p>Get all locked sqldatabases (any type of lock):</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">locked-sqldatabases</span>
    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.sqldatabase</span>
@@ -1030,9 +1030,9 @@ To get unlocked resources, use “Absent” type.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">example</dt>
-<dd class="field-odd"><p>Get all unlocked resource groups:</p>
-</dd>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<p>Get all unlocked resource groups:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">unlock-rgs</span>
    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.resourcegroup</span>

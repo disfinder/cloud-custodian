@@ -320,7 +320,7 @@ ARM resource type supported by Cloud Custodian.</p>
         <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">test</span>
         <span class="nt">op</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">contains</span>
     <span class="nt">actions</span><span class="p">:</span>
-     <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">delete</span>
+      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">delete</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -363,9 +363,9 @@ ARM resource type supported by Cloud Custodian.</p>
 See <a class="reference external" href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-lock-resources#who-can-create-or-delete-locks">Who can create or delete locks</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">example</dt>
-<dd class="field-odd"><p>Add ReadOnly lock to all keyvaults:</p>
-</dd>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<p>Add ReadOnly lock to all keyvaults:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">lock-keyvaults</span>
      <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.keyvault</span>
@@ -396,10 +396,13 @@ See <a class="reference external" href="https://docs.microsoft.com/en-us/azure/a
 Your policy credentials are used to get the trigger endpoint URL with secrets
 using the resource group and app name.</p>
 <p>This action is based on the <code class="docutils literal notranslate"><span class="pre">webhook</span></code> action and supports the same options.</p>
-<dl class="field-list">
+<dl class="field-list simple">
 <dt class="field-odd">example</dt>
-<dd class="field-odd"><p>This policy will call logic app with list of VM’s</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>This policy will call logic app with list of VM’s</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">call-logic-app</span>
     <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.vm</span>
     <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">|</span>
@@ -412,8 +415,7 @@ using the resource group and app name.</p>
        <span class="nt">body</span><span class="p">:</span> <span class="s">&#39;resources[].{</span><span class="nv"> </span><span class="s">vm_name:</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">}&#39;</span>
 </pre></div>
 </div>
-</dd>
-</dl>
+</div></blockquote>
 <div class="toggle docutils container">
 <div class="header docutils container" style=""></div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">properties</span><span class="p">:</span>
   <span class="nt">batch</span><span class="p">:</span>
@@ -463,9 +465,11 @@ using the resource group and app name.</p>
 with a given timezone. The default value is ‘utc’.</p>
 <p>If neither ‘days’ nor ‘hours’ is specified, Cloud Custodian will default
 to marking the resource for action 4 days in the future.</p>
-<dl class="field-list">
+<dl class="field-list simple">
 <dt class="field-odd">example</dt>
-<dd class="field-odd"><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">vm-mark-for-stop</span>
    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.vm</span>
    <span class="nt">filters</span><span class="p">:</span>
@@ -477,8 +481,6 @@ to marking the resource for action 4 days in the future.</p>
        <span class="nt">op</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">stop</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 <div class="toggle docutils container">
 <div class="header docutils container" style=""></div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">properties</span><span class="p">:</span>
   <span class="nt">days</span><span class="p">:</span>
@@ -509,8 +511,7 @@ to marking the resource for action 4 days in the future.</p>
 <div class="section" id="notify">
 <span id="azure-common-actions-notify"></span><h2>notify<a class="headerlink" href="#notify" title="Permalink to this headline">¶</a></h2>
 <p>Action to queue email.</p>
-<p>See <a href="#id1"><span class="problematic" id="id2">`</span></a>c7n_mailer readme.md &lt;<a class="reference external" href="https://github.com/cloud-custodian/cloud-custodian/blob/">https://github.com/cloud-custodian/cloud-custodian/blob/</a>
-master/tools/c7n_mailer/README.md#using-on-azure&gt;`_for more information.</p>
+<p>See <a class="reference external" href="https://github.com/cloud-custodian/cloud-custodian/blob/master/tools/c7n_mailer/README.md#using-on-azure">c7n_mailer readme.md</a> for more information.</p>
 <dl class="field-list simple">
 <dt class="field-odd">example</dt>
 <dd class="field-odd"><p></p></dd>
@@ -601,9 +602,11 @@ master/tools/c7n_mailer/README.md#using-on-azure&gt;`_for more information.</p>
 <div class="section" id="tag">
 <span id="azure-common-actions-tag"></span><h2>tag<a class="headerlink" href="#tag" title="Permalink to this headline">¶</a></h2>
 <p>Adds tags to Azure resources</p>
-<dl class="field-list">
+<dl class="field-list simple">
 <dt class="field-odd">example</dt>
-<dd class="field-odd"><p>This policy will tag all existing resource groups with a value such as Environment</p>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>This policy will tag all existing resource groups with a value such as Environment</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure-tag-resourcegroups</span>
     <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.resourcegroup</span>
@@ -615,8 +618,6 @@ master/tools/c7n_mailer/README.md#using-on-azure&gt;`_for more information.</p>
        <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Test</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 <div class="toggle docutils container">
 <div class="header docutils container" style=""></div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">properties</span><span class="p">:</span>
   <span class="nt">tag</span><span class="p">:</span>

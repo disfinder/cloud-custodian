@@ -29,6 +29,7 @@ provide the necessary permissions to run the policy locally.
 :example:
 
 .. code-block:: yaml
+
     policies:
         - name: role-assignment-owner
           resource: azure.roleassignment

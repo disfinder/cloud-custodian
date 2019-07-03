@@ -46,6 +46,7 @@ Deletes a deployment
 :Example:
 
 .. code-block:: yaml
+
     policies:
       - name: delete-deployments
         description: Delete all deployments

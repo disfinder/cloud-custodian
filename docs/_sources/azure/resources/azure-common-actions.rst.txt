@@ -44,6 +44,7 @@ auto-tag-user
 Attempts to tag a resource with the first user who created/modified it.
 
 :example:
+
 This policy will tag all existing resource groups with the 'CreatorEmail' tag
 
 .. code-block:: yaml
@@ -98,24 +99,27 @@ generic resource type `armresource` or on any other more specific
 ARM resource type supported by Cloud Custodian.
 
 :example:
+
 This policy will delete any ARM resource with 'test' in the name
 
 .. code-block:: yaml
 
-        policies:
-          - name: delete-test-resources
-            resource: azure.armresource
-            description: |
-              Deletes any ARM resource with 'test' in the name
-            filters:
-              - type: value
-                key: name
-                value: test
-                op: contains
-            actions:
-             - type: delete
+    policies:
+      - name: delete-test-resources
+        resource: azure.armresource
+        description: |
+          Deletes any ARM resource with 'test' in the name
+        filters:
+          - type: value
+            key: name
+            value: test
+            op: contains
+        actions:
+          - type: delete
+
 
 :example:
+
 This policy will delete any Network Security Group  with 'test' in the name
 
 .. code-block:: yaml
@@ -167,7 +171,9 @@ To create or delete management locks, you must have proper access.
 See `Who can create or delete locks <https://docs.microsoft.com/en-us/azure/
 azure-resource-manager/resource-group-lock-resources#who-can-create-or-delete-locks>`_
 
-:example: Add ReadOnly lock to all keyvaults:
+:example:
+
+Add ReadOnly lock to all keyvaults:
 
 .. code-block:: yaml
 
@@ -214,7 +220,9 @@ using the resource group and app name.
 
 This action is based on the ``webhook`` action and supports the same options.
 
-:example: This policy will call logic app with list of VM's
+:example:
+
+This policy will call logic app with list of VM's
 
     .. code-block:: yaml
 
@@ -295,18 +303,18 @@ to marking the resource for action 4 days in the future.
 
 :example:
 
-    .. code-block :: yaml
+.. code-block :: yaml
 
-       policies:
-        - name: vm-mark-for-stop
-          resource: azure.vm
-          filters:
-            - type: value
-              key: Name
-              value: instance-to-stop-in-four-days
-          actions:
-            - type: mark-for-op
-              op: stop
+   policies:
+    - name: vm-mark-for-stop
+      resource: azure.vm
+      filters:
+        - type: value
+          key: Name
+          value: instance-to-stop-in-four-days
+      actions:
+        - type: mark-for-op
+          op: stop
 
 .. container:: toggle
 
@@ -351,7 +359,7 @@ notify
 Action to queue email.
 
 See `c7n_mailer readme.md <https://github.com/cloud-custodian/cloud-custodian/blob/
-master/tools/c7n_mailer/README.md#using-on-azure>`_for more information.
+master/tools/c7n_mailer/README.md#using-on-azure>`_ for more information.
 
 :example:
 
@@ -454,19 +462,21 @@ tag
 
 Adds tags to Azure resources
 
-:example: This policy will tag all existing resource groups with a value such as Environment
+:example:
 
-    .. code-block:: yaml
+This policy will tag all existing resource groups with a value such as Environment
 
-      policies:
-        - name: azure-tag-resourcegroups
-          resource: azure.resourcegroup
-          description: |
-            Tag all existing resource groups with a value such as Environment
-          actions:
-           - type: tag
-             tag: Environment
-             value: Test
+.. code-block:: yaml
+
+  policies:
+    - name: azure-tag-resourcegroups
+      resource: azure.resourcegroup
+      description: |
+        Tag all existing resource groups with a value such as Environment
+      actions:
+       - type: tag
+         tag: Environment
+         value: Test
 
 .. container:: toggle
 
@@ -507,6 +517,7 @@ Setting the space value to 0 removes all tags but those
 listed to preserve.
 
 :example:
+
 .. code-block :: yaml
 
    policies:
@@ -570,6 +581,7 @@ untag
 Removes tags from Azure resources
 
 :example:
+
 This policy will remove tag for all existing resource groups with a key such as Environment
 
     .. code-block:: yaml
