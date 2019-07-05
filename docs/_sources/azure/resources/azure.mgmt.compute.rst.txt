@@ -39,6 +39,8 @@ Filters
 -------
 
 
+  - :ref:`cost <azure.common.filters.cost>`
+  
   - :ref:`diagnostic-settings <azure.common.filters.diagnostic-settings>`
   
   - :ref:`event <azure.common.filters.event>`
@@ -111,6 +113,8 @@ Filters
 -------
 
 
+  - :ref:`cost <azure.common.filters.cost>`
+  
   - :ref:`diagnostic-settings <azure.common.filters.diagnostic-settings>`
   
   - :ref:`event <azure.common.filters.event>`
@@ -281,6 +285,8 @@ Filters
 -------
 
 
+  - :ref:`cost <azure.common.filters.cost>`
+  
   - :ref:`event <azure.common.filters.event>`
   
   - :ref:`instance-view <azure.common.filters.instance-view>`
@@ -555,6 +561,8 @@ Filters
 -------
 
 
+  - :ref:`cost <azure.common.filters.cost>`
+  
   - :ref:`diagnostic-settings <azure.common.filters.diagnostic-settings>`
   
   - :ref:`event <azure.common.filters.event>`

@@ -4,6 +4,9 @@ Azure Common Filters
 Filters
 
 
+   - :ref:`cost <Azure.common.filters.cost>`
+
+
    - :ref:`diagnostic-settings <Azure.common.filters.diagnostic-settings>`
 
 
@@ -42,6 +45,148 @@ Filters
 
    - :ref:`value <Azure.common.filters.value>`
 
+
+
+
+.. _Azure.common.filters.cost:
+
+cost
+++++
+
+Filter resources by the cost consumed over a timeframe.
+Timeframe can be either number of days before today or one of:
+
+WeekToDate,
+MonthToDate,
+YearToDate,
+TheLastWeek,
+TheLastMonth,
+TheLastYear
+
+
+:examples:
+
+SQL servers that were cost more than 2000 in the last month.
+
+.. code-block:: yaml
+
+        policies:
+            - name: expensive-sql-servers-last-month
+              resource: azure.sqlserver
+              filters:
+              - type: cost
+                timeframe: TheLastMonth
+                op: gt
+                value: 2000
+
+SQL servers that were cost more than 2000 in the last 30 days not including today.
+
+.. code-block:: yaml
+
+        policies:
+            - name: expensive-sql-servers
+              resource: azure.sqlserver
+              filters:
+              - type: cost
+                timeframe: 30
+                op: gt
+                value: 2000
+
+.. container:: toggle
+
+  
+
+  .. raw:: html
+     
+    <div class="header docutils container" style=""></div>
+
+  .. code-block:: yaml
+
+    properties:
+      default:
+        type: object
+      key: null
+      op:
+        enum:
+        - eq
+        - equal
+        - ne
+        - not-equal
+        - gt
+        - greater-than
+        - ge
+        - gte
+        - le
+        - lte
+        - lt
+        - less-than
+        - glob
+        - regex
+        - regex-case
+        - in
+        - ni
+        - not-in
+        - contains
+        - difference
+        - intersect
+      timeframe:
+        oneOf:
+        - enum:
+          - WeekToDate
+          - MonthToDate
+          - YearToDate
+          - TheLastWeek
+          - TheLastMonth
+          - TheLastYear
+        - minimum: 1
+          type: number
+      type:
+        enum:
+        - cost
+      value:
+        oneOf:
+        - type: array
+        - type: string
+        - type: boolean
+        - type: number
+        - type: 'null'
+      value_from:
+        additionalProperties: 'False'
+        properties:
+          expr:
+            oneOf:
+            - type: integer
+            - type: string
+          format:
+            enum:
+            - csv
+            - json
+            - txt
+            - csv2dict
+          url:
+            type: string
+        required:
+        - url
+        type: object
+      value_regex:
+        type: string
+      value_type:
+        enum:
+        - age
+        - integer
+        - expiration
+        - normalize
+        - size
+        - cidr
+        - cidr_size
+        - swap
+        - resource_count
+        - expr
+        - unique_size
+        - date
+    required:
+    - timeframe
+    - type
 
 
 

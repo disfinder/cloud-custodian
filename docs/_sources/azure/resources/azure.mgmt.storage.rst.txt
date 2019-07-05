@@ -25,6 +25,8 @@ Filters
 -------
 
 
+  - :ref:`cost <azure.common.filters.cost>`
+  
   - :ref:`event <azure.common.filters.event>`
   
   - :ref:`firewall-rules <azure.common.filters.firewall-rules>`
