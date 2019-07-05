@@ -240,9 +240,46 @@
 <div><ul class="simple">
 <li><p><a class="reference internal" href="azure-common-actions.html#azure-common-actions-logic-app"><span class="std std-ref">logic-app</span></a></p></li>
 <li><p><a class="reference internal" href="azure-common-actions.html#azure-common-actions-notify"><span class="std std-ref">notify</span></a></p></li>
+<li><p><a class="reference internal" href="#azure-cosmosdb-collection-actions-replace-offer"><span class="std std-ref">replace-offer</span></a></p></li>
 <li><p><a class="reference internal" href="azure-common-actions.html#azure-common-actions-webhook"><span class="std std-ref">webhook</span></a></p></li>
 </ul>
 </div></blockquote>
+<div class="section" id="replace-offer">
+<span id="azure-cosmosdb-collection-actions-replace-offer"></span><h4>replace-offer<a class="headerlink" href="#replace-offer" title="Permalink to this headline">¶</a></h4>
+<p>CosmosDB Replace Offer Action</p>
+<p>Modify the throughput of a cosmodb collection’s offer</p>
+<dl class="field-list simple">
+<dt class="field-odd">example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>This policy will ensure that no collections have offers with more than 400 RU/s throughput.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">limit-throughput-to-400</span>
+    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.cosmosdb-collection</span>
+    <span class="nt">filters</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">offer</span>
+        <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">content.offerThroughput</span>
+        <span class="nt">op</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gt</span>
+        <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">400</span>
+    <span class="nt">actions</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">replace-offer</span>
+        <span class="nt">throughput</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">400</span>
+</pre></div>
+</div>
+<div class="toggle docutils container">
+<div class="header docutils container" style=""></div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">properties</span><span class="p">:</span>
+  <span class="nt">throughput</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">number</span>
+  <span class="nt">type</span><span class="p">:</span>
+    <span class="nt">enum</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">replace-offer</span>
+<span class="nt">required</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">throughput</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="azure-cosmosdb-database">
