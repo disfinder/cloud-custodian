@@ -212,6 +212,8 @@ Actions
   
   - :ref:`notify <azure.common.actions.notify>`
   
+  - :ref:`resize <azure.sqldatabase.actions.resize>`
+
   - :ref:`tag <azure.common.actions.tag>`
   
   - :ref:`tag-trim <azure.common.actions.tag-trim>`
@@ -225,6 +227,61 @@ Actions
   - :ref:`webhook <azure.common.actions.webhook>`
   
 
+
+
+.. _azure.sqldatabase.actions.resize:
+
+resize
+++++++
+Action to scale database.
+Required arguments: capacity in DTUs and tier (Basic, Standard or Premium).
+Max data size (in bytes) is optional.
+
+:example:
+This policy will resize database to Premium tier with 500 DTU and set max data size to 750 GB
+
+.. code-block:: yaml
+
+    policies:
+      - name: resize-db
+        resource: azure.sqldatabase
+        filters:
+          - type: value
+            key: name
+            value: cctestdb
+        actions:
+          - type: resize
+            tier: Premium
+            capacity: 500
+            max_size_bytes: 805306368000
+
+.. container:: toggle
+
+  
+
+  .. raw:: html
+     
+    <div class="header docutils container" style=""></div>
+
+  .. code-block:: yaml
+
+    properties:
+      capacity:
+        type: number
+      max_size_bytes:
+        type: number
+      tier:
+        enum:
+        - Basic
+        - Standard
+        - Premium
+      type:
+        enum:
+        - resize
+    required:
+    - capacity
+    - tier
+    - type
 
 
 .. _azure.sqldatabase.actions.update-long-term-backup-retention-policy:
