@@ -157,7 +157,10 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#writing-an-email-template">Writing an email template</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#developer-install-os-x-el-capitan">Developer Install (OS X El Capitan)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#testing-templates-and-recipients">Testing Templates and Recipients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-templates-and-recipients">Testing Templates and Recipients</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#testing-templates-for-azure">Testing Templates for Azure</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="c7n-trailcreator.html">AWS Retroactive Tagging Resource Creators</a></li>
@@ -1217,6 +1220,30 @@ receive mail, and print the rendered message body template to STDOUT.</p></li>
 <li><p>With the <code class="docutils literal notranslate"><span class="pre">-d</span></code> | <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code> argument, it will print the actual email body (including headers)
 that would be sent, for each message that would be sent, to STDOUT.</p></li>
 </ul>
+<div class="section" id="testing-templates-for-azure">
+<h3>Testing Templates for Azure<a class="headerlink" href="#testing-templates-for-azure" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">c7n-mailer-replay</span></code> entrypoint can be used to test templates for Azure with either of the arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-T</span></code> | <code class="docutils literal notranslate"><span class="pre">--template-print</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-d</span></code> | <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code></p></li>
+</ul>
+<p>Running <code class="docutils literal notranslate"><span class="pre">c7n-mailer-replay</span></code> without either of these arguments will throw an error as it will attempt
+to authorize with AWS.</p>
+<p>The following is an example for retrieving a sample message to test against templates:</p>
+<ul class="simple">
+<li><p>Run a policy with the notify action, providing the name of the template to test, to populate the queue.</p></li>
+<li><p>Using the azure cli, save the message locally:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ az storage message get --queue-name &lt;queuename&gt; --account-name &lt;storageaccountname&gt; --query &#39;[].content&#39; &gt; test_message.gz
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The example message can be provided to <code class="docutils literal notranslate"><span class="pre">c7n-mailer-replay</span></code> by running:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ c7n-mailer-replay test_message.gz -T --config mailer.yml
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 
