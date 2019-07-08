@@ -75,6 +75,10 @@ Filters
   
   - :ref:`metric <azure.common.filters.metric>`
   
+  - :ref:`offhour <azure.common.filters.offhour>`
+  
+  - :ref:`onhour <azure.common.filters.onhour>`
+  
   - :ref:`policy-compliant <azure.common.filters.policy-compliant>`
   
   - :ref:`resource-lock <azure.common.filters.resource-lock>`
@@ -257,6 +261,10 @@ Filters
   - :ref:`marked-for-op <azure.common.filters.marked-for-op>`
   
   - :ref:`metric <azure.common.filters.metric>`
+  
+  - :ref:`offhour <azure.common.filters.offhour>`
+  
+  - :ref:`onhour <azure.common.filters.onhour>`
   
   - :ref:`policy-compliant <azure.common.filters.policy-compliant>`
   
@@ -453,6 +461,10 @@ Filters
   - :ref:`marked-for-op <azure.common.filters.marked-for-op>`
   
   - :ref:`metric <azure.common.filters.metric>`
+  
+  - :ref:`offhour <azure.common.filters.offhour>`
+  
+  - :ref:`onhour <azure.common.filters.onhour>`
   
   - :ref:`policy-compliant <azure.common.filters.policy-compliant>`
   
@@ -693,6 +705,10 @@ Filters
   
   - :ref:`metric <azure.common.filters.metric>`
   
+  - :ref:`offhour <azure.common.filters.offhour>`
+  
+  - :ref:`onhour <azure.common.filters.onhour>`
+  
   - :ref:`policy-compliant <azure.common.filters.policy-compliant>`
   
   - :ref:`resource-lock <azure.common.filters.resource-lock>`
@@ -761,6 +777,10 @@ Filters
   - :ref:`marked-for-op <azure.common.filters.marked-for-op>`
   
   - :ref:`metric <azure.common.filters.metric>`
+  
+  - :ref:`offhour <azure.common.filters.offhour>`
+  
+  - :ref:`onhour <azure.common.filters.onhour>`
   
   - :ref:`policy-compliant <azure.common.filters.policy-compliant>`
   
@@ -835,6 +855,10 @@ Filters
   - :ref:`marked-for-op <azure.common.filters.marked-for-op>`
   
   - :ref:`metric <azure.common.filters.metric>`
+  
+  - :ref:`offhour <azure.common.filters.offhour>`
+  
+  - :ref:`onhour <azure.common.filters.onhour>`
   
   - :ref:`policy-compliant <azure.common.filters.policy-compliant>`
   

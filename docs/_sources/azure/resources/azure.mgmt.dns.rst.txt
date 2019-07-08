@@ -41,6 +41,10 @@ Filters
   
   - :ref:`metric <azure.common.filters.metric>`
   
+  - :ref:`offhour <azure.common.filters.offhour>`
+  
+  - :ref:`onhour <azure.common.filters.onhour>`
+  
   - :ref:`policy-compliant <azure.common.filters.policy-compliant>`
   
   - :ref:`resource-lock <azure.common.filters.resource-lock>`
@@ -107,6 +111,10 @@ Filters
   - :ref:`event <azure.common.filters.event>`
   
   - :ref:`metric <azure.common.filters.metric>`
+  
+  - :ref:`offhour <azure.common.filters.offhour>`
+  
+  - :ref:`onhour <azure.common.filters.onhour>`
   
   - :ref:`policy-compliant <azure.common.filters.policy-compliant>`
   
