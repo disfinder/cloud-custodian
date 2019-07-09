@@ -1,0 +1,450 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Email - Use Azure Logic Apps to notify users of policy violations &mdash; Cloud Custodian  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/icon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../../_static/js/expand.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/expand.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Supported Resources" href="../../policy/index.html" />
+    <link rel="prev" title="Find Virtual Machines with Public IP address" href="../vmwithpublicip.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Cloud Custodian
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../filters.html">Generic Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../actions.html">Generic Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart/advanced.html">Advanced Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart/policyStructure.html">Example tag compliance policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deployment.html">Deployment</a></li>
+</ul>
+<p class="caption"><span class="caption-text">AWS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../aws/gettingstarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../aws/examples/index.html">Example Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../aws/aws-modes.html">AWS Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../aws/usage.html">Monitoring your environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../aws/lambda.html">Lambda Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../aws/resources/index.html">AWS Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Azure</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../gettingstarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication &amp; Access</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../addstoragefirewall.html">Add storage firewall</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autotagusers.html">Automatically tag the creator of a resource or resource group.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../delayedoperation.html">Delayed Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lbfilterbyfrotendip.html">Filter load balancer by front end public ip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../metrics.html">Filter resources by metrics from Azure Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notify.html">Email Notify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nsg.html">Deny access to Network Security Group.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../orphanresources.html">Delete or report on orphan resources (NICs, Disks, Public IPs).</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../removepublicstorageips.html">Remove public storage IP-s</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../resizeappplan.html">Resize an Application Service Plan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rgremoveempty.html">Remove Empty Resource Groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routetablewithsubnet.html">Find Route Tables With A Specific Subnet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sqldatabaselongtermbackupretention.html">Find SQL Databases with a Monthly Long Term Backup Retention More Than 1 Year</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sqldatabaseshorttermbackupretention.html">Find SQL Databases with a Short Term Backup Retention Less Than 14 Days</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sqldatabaseupdateretentionpolicies.html">Update SQL Database Retention Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sqldatabasewithpremiumsku.html">Find all SQL Databases with Premium SKU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stoppedvm.html">Find Stopped Virtual Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tagadd.html">Add Tag To Virtual Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tagremove.html">Remove Tag From Virtual Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tagtrim.html">Trim Tags From Virtual Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vmwithpublicip.html">Find Virtual Machines with Public IP address</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#notitications">Notitications</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Email - Use Azure Logic Apps to notify users of policy violations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-azure-logic-app">Create Azure Logic App</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#author-cloud-custodian-policy">Author Cloud Custodian policy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#test-the-policy">Test the policy</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../policy/index.html">Supported Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../azure-modes.html">Azure Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced/index.html">Advanced Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/index.html">Azure Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GCP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../gcp/gettingstarted.html">Getting Started (Beta)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gcp/gcp-modes.html">GCP Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gcp/examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gcp/policy/index.html">Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gcp/contribute.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gcp/contribute.html#adding-new-gcp-resources">Adding New GCP Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gcp/contribute.html#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gcp/resources/index.html">GCP Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/c7n-org.html">c7n-org: Multi Account Custodian Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/c7n-policystream.html">c7n-policystream: Policy Changes from Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/c7n-mailer.html">c7n-mailer: Custodian Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/c7n-trailcreator.html">AWS Retroactive Tagging Resource Creators</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribute.html">Contributing to Cloud Custodian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/index.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/installing.html">Installing for Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/tests.html">Testing for Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/documentation.html">Documentation For Developers</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Cloud Custodian</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Examples</a> &raquo;</li>
+        
+      <li>Email - Use Azure Logic Apps to notify users of policy violations</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="email-use-azure-logic-apps-to-notify-users-of-policy-violations">
+<span id="azure-examples-notifications-logic-app"></span><h1>Email - Use Azure Logic Apps to notify users of policy violations<a class="headerlink" href="#email-use-azure-logic-apps-to-notify-users-of-policy-violations" title="Permalink to this headline">¶</a></h1>
+<p>Azure Logic Apps are a great option to create simple scalable workflows in Azure such as sending an email or posting to Microsoft Teams. Logic Apps can have a <cite>Request trigger</cite> to initiate a workflow and this can be invoked with a Custodian <a class="reference internal" href="../../resources/azure-common-actions.html#azure-common-actions-logic-app"><span class="std std-ref">logic-app</span></a> action.</p>
+<div class="section" id="create-azure-logic-app">
+<h2>Create Azure Logic App<a class="headerlink" href="#create-azure-logic-app" title="Permalink to this headline">¶</a></h2>
+<p>We will now walkthrough the steps to configure a Logic Apps workflow that will consist of an <cite>Request trigger</cite> and an <cite>Outlook send email action</cite>.</p>
+<div class="section" id="create-a-new-azure-logic-app">
+<h3>Create a new Azure Logic App<a class="headerlink" href="#create-a-new-azure-logic-app" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>From the main Azure menu, choose <strong>Create a resource ─▶ Integration ─▶ Logic App.</strong></p></li>
+<li><p>Now, provide details about your logic app as shown here. After you’re done, hit <strong>Create</strong>.</p></li>
+</ol>
+<img alt="../../../_images/f0.png" src="../../../_images/f0.png" />
+<ol class="arabic simple" start="3">
+<li><p>Under <strong>Templates</strong>, choose <strong>Blank Logic App</strong>.</p></li>
+</ol>
+</div>
+<div class="section" id="create-request-trigger">
+<h3>Create Request trigger<a class="headerlink" href="#create-request-trigger" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Under <strong>Built-in</strong>, select <strong>Request</strong></p></li>
+</ol>
+<img alt="../../../_images/f1.png" src="../../../_images/f1.png" />
+<ol class="arabic simple" start="2">
+<li><p>Now select <strong>When a HTTP request is received</strong> and the first connect is complete.</p></li>
+</ol>
+<img alt="../../../_images/f2.png" src="../../../_images/f2.png" />
+<p>A URL will be generated when you save that will allow you to invoke the Logic App.</p>
+</div>
+<div class="section" id="create-the-outlook-send-email-action">
+<h3>Create the Outlook Send Email action<a class="headerlink" href="#create-the-outlook-send-email-action" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Click the <strong>+ New Step</strong> to create an action to send an email.</p></li>
+<li><p>In the search box, search for <cite>Send an email (V2)</cite> and select under <strong>Actions</strong> the <cite>Office 365 Outlook</cite> action.</p></li>
+</ol>
+<img alt="../../../_images/f3.png" src="../../../_images/f3.png" />
+<ol class="arabic simple" start="3">
+<li><p>Sign into an Office 365 account to create a connection for your Logic App. This will be the account will send emails from when the workflow is invoked.</p></li>
+</ol>
+<img alt="../../../_images/f4.png" src="../../../_images/f4.png" />
+<ol class="arabic simple" start="4">
+<li><p>Next, we need to customize the email template that gets sent. Go to into the <cite>Code View</cite> mode by hitting the <strong>Code View Button</strong>.</p></li>
+</ol>
+<img alt="../../../_images/f5.png" src="../../../_images/f5.png" />
+<ol class="arabic simple" start="5">
+<li><p>Replace the <strong>actions</strong> section with the following:</p></li>
+</ol>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>&quot;actions&quot;: {
+    &quot;Send_an_email_(V2)&quot;: {
+        &quot;inputs&quot;: {
+            &quot;body&quot;: {
+                &quot;Body&quot;: &quot;&lt;p&gt;&lt;span style=\&quot;font-size: 16px\&quot;&gt;&lt;strong&gt;Policy Name: &lt;/strong&gt;&lt;/span&gt;@{triggerBody()[&#39;PolicyName&#39;]}&lt;br&gt;\n&lt;span style=\&quot;font-size: 16px\&quot;&gt;&lt;strong&gt;Policy Description:&lt;/strong&gt;&lt;/span&gt;&lt;strong&gt; &lt;/strong&gt;@{triggerBody()[&#39;PolicyDescription&#39;]}&lt;br&gt;\n&lt;strong&gt;&lt;br&gt;\n&lt;/strong&gt;&lt;span style=\&quot;font-size: 16px\&quot;&gt;&lt;strong&gt;Resource&lt;/strong&gt;&lt;/span&gt;&lt;strong&gt;&lt;br&gt;\n--------------&lt;br&gt;\nName: &lt;/strong&gt;@{triggerBody()[&#39;Resource&#39;][&#39;Name&#39;]}&lt;br&gt;\n&lt;strong&gt;Location: &lt;/strong&gt;@{triggerBody()[&#39;Resource&#39;][&#39;Location&#39;]}&lt;br&gt;\n&lt;strong&gt;Owner: &lt;/strong&gt;@{triggerBody()[&#39;Resource&#39;][&#39;Owner&#39;]}&lt;br&gt;\n&lt;strong&gt;VmSize: &lt;/strong&gt;@{triggerBody()[&#39;Resource&#39;][&#39;VmSize&#39;]}&lt;br&gt;\n&lt;br&gt;\n&lt;/p&gt;&quot;,
+                &quot;Subject&quot;: &quot;Cloud Custodian Policy: @{triggerBody()[&#39;PolicyName&#39;]}&quot;,
+                &quot;To&quot;: &quot;@{triggerBody()[&#39;Resource&#39;][&#39;Owner&#39;]}&quot;
+            },
+            &quot;host&quot;: {
+                &quot;connection&quot;: {
+                    &quot;name&quot;: &quot;@parameters(&#39;$connections&#39;)[&#39;office365&#39;][&#39;connectionId&#39;]&quot;
+                }
+            },
+            &quot;method&quot;: &quot;post&quot;,
+            &quot;path&quot;: &quot;/v2/Mail&quot;
+        },
+        &quot;runAfter&quot;: {},
+        &quot;type&quot;: &quot;ApiConnection&quot;
+    }
+}
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>Return back to the <cite>Designer</cite> mode, and you should see the template in the <strong>Send an email (V2)</strong> action.</p></li>
+</ol>
+<img alt="../../../_images/f6.png" src="../../../_images/f6.png" />
+<ol class="arabic simple" start="7">
+<li><p>Finally, save the workflow.</p></li>
+</ol>
+<img alt="../../../_images/f7.png" src="../../../_images/f7.png" />
+</div>
+</div>
+<div class="section" id="author-cloud-custodian-policy">
+<h2>Author Cloud Custodian policy<a class="headerlink" href="#author-cloud-custodian-policy" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have a Logic App workflow that can send an email with our Office 365 account, we need a policy we want to be notified about. Let’s start with the <a class="reference internal" href="../vmwithpublicip.html#azure-examples-vm-with-public-ips"><span class="std std-ref">Find Virtual Machines with Public IP address</span></a> policy.
+This Custodian policy will find all Azure Virtual Machines that have public IPs attached to them.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">find-vms-with-public-ips</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+      <span class="no">VMs should not have public-ips attached to them.</span>
+    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.vm</span>
+    <span class="nt">filters</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">network-interface</span>
+        <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">properties.ipConfigurations[].properties.publicIPAddress.id</span>
+        <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">not-null</span>
+</pre></div>
+</div>
+<div class="section" id="add-logic-app-action">
+<h3>Add Logic App action<a class="headerlink" href="#add-logic-app-action" title="Permalink to this headline">¶</a></h3>
+<p>Now, we will add a <a class="reference internal" href="../../resources/azure-common-actions.html#azure-common-actions-logic-app"><span class="std std-ref">logic-app</span></a> action to our policy to invoke our newly created Logic App.
+This action leverages tags that the resource has been auto-tagged with the following <a class="reference internal" href="../autotagusers.html#azure-examples-autotagusers"><span class="std std-ref">auto-tag-user policy</span></a>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span>- type: logic-app
+  resource-group: cloud-custodian            ─▶ This is the resource group where you created your Logic App
+  logic-app-name: custodian-notifications    ─▶ This is the name of your Logic App
+  batch: false                               ─▶ We want to invoke the logic app for each resource that violates our policy
+  body: &gt;                                    ─▶ We will select specific properties of our resource that can be used in our Logic App
+      {
+      PolicyName: policy.name,
+      PolicyDescription: policy.description,
+      Resource: resource.
+          {
+          Name: name,
+          Location: location,
+          Owner: tags.CreatorEmail,                  ─▶ The CreatorEmail tag on the resource will be recipient of the email.
+          VmSize: properties.hardwareProfile.vmSize
+          }
+      }
+</pre></div>
+</div>
+</div>
+<div class="section" id="final-updated-policy">
+<h3>Final updated policy<a class="headerlink" href="#final-updated-policy" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">find-vms-with-public-ips</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+      <span class="no">VMs should not have public-ips attached to them.</span>
+    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.vm</span>
+    <span class="nt">filters</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">network-interface</span>
+        <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">properties.ipConfigurations[].properties.publicIPAddress.id</span>
+        <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">not-null</span>
+    <span class="nt">actions</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">logic-app</span>
+        <span class="nt">resource-group</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cloud-custodian</span>
+        <span class="nt">logic-app-name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">custodian-notifications</span>
+        <span class="nt">batch</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+        <span class="nt">body</span><span class="p">:</span> <span class="p p-Indicator">&gt;</span>
+          <span class="no">{</span>
+            <span class="no">PolicyName: policy.name,</span>
+            <span class="no">PolicyDescription: policy.description,</span>
+            <span class="no">Resource: resource.</span>
+              <span class="no">{</span>
+                <span class="no">Name: name,</span>
+                <span class="no">Location: location,</span>
+                <span class="no">Owner: tags.CreatorEmail,</span>
+                <span class="no">VmSize: properties.hardwareProfile.vmSize</span>
+              <span class="no">}</span>
+          <span class="no">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="test-the-policy">
+<h2>Test the policy<a class="headerlink" href="#test-the-policy" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="policy-violating-virtual-machine">
+<h3>Policy violating virtual machine<a class="headerlink" href="#policy-violating-virtual-machine" title="Permalink to this headline">¶</a></h3>
+<p>Notice that the Virtual Machine has the an <strong>CreatorEmail</strong> tag; this is from executing the following <a class="reference internal" href="../autotagusers.html#azure-examples-autotagusers"><span class="std std-ref">auto-tag-user policy</span></a> against our subscription Virtual Machine resources. In addition, the Virtiual Machine has a <strong>Public Ip Address</strong>, which is a violation of our policy.</p>
+<img alt="../../../_images/f8.png" src="../../../_images/f8.png" />
+</div>
+<div class="section" id="email-sent-from-logic-app">
+<h3>Email sent from logic app<a class="headerlink" href="#email-sent-from-logic-app" title="Permalink to this headline">¶</a></h3>
+<p>This is an example email that will be sent when Custodian is ran and the Logic App is invoked.</p>
+<img alt="../../../_images/f9.png" src="../../../_images/f9.png" />
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../policy/index.html" class="btn btn-neutral float-right" title="Supported Resources" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../vmwithpublicip.html" class="btn btn-neutral float-left" title="Find Virtual Machines with Public IP address" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Capital One Services, LLC
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
